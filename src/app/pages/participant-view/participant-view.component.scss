@@ -1,0 +1,251 @@
+.participation-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgb(239, 237, 237);
+}
+
+.card-center {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.card {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+.intro-text{
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  height: 100vh;
+}
+
+.card :hover {
+  box-shadow: 1px 1px 25px #9a9999;
+}
+.active {
+  background-color: rgba(63, 81, 181, 0.92);
+  box-shadow: none;
+}
+.actions-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  top: 15vh;
+  gap: 20px;
+}
+
+.options-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  flex-wrap: nowrap;
+  bottom: 15vh;
+  gap: 20px;
+}
+
+.promedio {
+  font-size: 1.3em;
+}
+
+.skeleton-container {
+  margin-top: 20vh;
+  display: flex;
+  margin-left: 2vw;
+}
+
+.users-box {
+  position: absolute;
+  bottom: 13px;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  display: flex;
+  justify-content: flex-start;
+  overflow: auto;
+  width: 90vw;
+  white-space: nowrap;
+}
+
+.card-user {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.answer {
+  background-color: #3749a8;
+}
+
+.left-icon {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+}
+
+.rigth-icon {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+}
+
+@media screen and (max-width: 940px) {
+  .participation-section {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  #desktop {
+    display: none;
+  }
+
+  .title{
+    font-size: 1.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+  }
+
+  .options-box {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    position: absolute;
+    gap: 10px;
+    max-width: 85vw;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+
+  .card-rta {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    height: 48vh;
+    width: 85vw;
+    overflow-y: auto;
+  }
+
+  .card-item {
+    width: 60px;
+    height: 60px;
+  }
+
+  .active {
+    background-color: rgba(63, 81, 181, 0.92);
+    box-shadow: none;
+  }
+
+  .results-mobile {
+    margin-top: 9vh;
+  }
+
+  .results-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+}
+
+@media screen and (min-height: 1100px) {
+  .card-center {
+    height: 467px;
+    margin-top: auto;
+  }
+}
+
+@media screen and (min-height: 950px) {
+  .card-center {
+    height: 467px;
+    margin-top: 21vh;
+  }
+}
+
+@media screen and (max-height: 740px) {
+  .card-center {
+    margin-top: 22vh;
+    height: 252px;
+  }
+}
+
+@media screen and (max-height: 604px) {
+  .card-center {
+    margin-top: 21vh;
+    height: 225px;
+  }
+
+}
+
+.actions-box-mobile{
+  position: absolute;
+  top: 1vh;
+  left: 15vw;
+  background-color: #9a9999;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 599px) {
+  #mobile {
+    display: none;
+  }
+}
