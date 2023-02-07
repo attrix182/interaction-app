@@ -1,25 +1,23 @@
-# Planning Time
+# Interaction App
 
-Deploy: https://planningtime.com.ar/
+Deploy: 
 
-![image](https://user-images.githubusercontent.com/44885834/209598372-777186d7-a338-4d6d-9239-402c08a241b7.png)
+![image](https://user-images.githubusercontent.com/44885834/217118850-d6b106a6-82b6-4f8b-98e3-65622ec2a7b5.png)
 
 # Informacion sobre el sitio
-## ¿Que es Planning time?
-Planning Time es una plataforma web en la que puedes generar una sesión de estimación de tareas en simples pasos.
+## ¿Que es Interaction App?
+Interaction App es una plataforma web en la que puedes crear presentaciones interactivas, en las cuales los participantes pueden interactuar con el contenido de la presentación, y el presentador puede ver en tiempo real las respuestas de los participantes.
 
 ## ¿Como funciona?
-Debes ingresar nombre de equipo, luego se disponibiliza un QR y un Link, los cuales
-puedes compartir con quienes desees que participen de la estimación.
+....
 
 ## ¿Como surgio?
-Planning Time surge de la necesidad de obtener y establecer de manera sencilla y rapida un puntaje para cada tarea del sprint.
-
+...
 
 ## Ejecutar en local:
 
-git clone https://github.com/attrix182/planning-time.git
-cd planning-time
+git clone https://github.com/attrix182/interaction-app.git
+cd interaction-app
 npm i
 ng s
 
