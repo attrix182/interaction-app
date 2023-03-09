@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { ParticipantViewComponent } from './pages/participant-view/participant-view.component';
 import { QrCodeModule } from 'ng-qrcode';
 import { LandingComponent } from './pages/landing/landing.component';
+import { DesignSesionComponent } from './desing-sesion/design-sesion/design-sesion.component';
+import { QuestionImagesComponent } from './pages/participant-view/question-types/question-images/question-images.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { LandingComponent } from './pages/landing/landing.component';
     ParticipateComponent,
     ParticipantViewComponent,
     LandingComponent,
+    DesignSesionComponent,
+    QuestionImagesComponent,
   ],
   imports: [
     BrowserModule,

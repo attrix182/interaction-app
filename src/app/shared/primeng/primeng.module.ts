@@ -12,7 +12,7 @@ import {CardModule} from 'primeng/card';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-
+import {DropdownModule} from 'primeng/dropdown';
 const PrimeNGModules = [
   InputTextModule,
   StepsModule,
@@ -25,6 +25,7 @@ const PrimeNGModules = [
   MessagesModule,
   MessageModule,
   ProgressSpinnerModule,
+  DropdownModule
 ];
 
 @NgModule({

@@ -18,14 +18,44 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
   event: EventSesion;
   override formGroup: any;
   userName: any = undefined;
-  options: string[] = ['1', '2', '3', '5', '8', '13', '?', '☕'];
-  optionSelected: string = undefined;
-  results: any[] = [];
-  promedio: number = 0;
-  showResults: boolean = false;
   activeUsers: any[] = undefined;
-  showActions:boolean = false;
 
+  eventData: any;
+  actualPage = 1 - 1;
+
+  testEvent = [
+    {
+      id: 1,
+      type: 'images',
+      question: '¿Cuál crees que cumple con Single Responsability?',
+      options: [
+        {
+          id: 1,
+          url: 'https://www.researchgate.net/publication/335351970/figure/fig5/AS:795048484536323@1566565738552/Code-snippet-implementing-the-check-ifA-B0.jpg',
+        },
+        {
+          id: 2,
+          url: 'https://intelliabbdotcom.files.wordpress.com/2018/03/snippet_def.jpg',
+        }
+      ]
+    },
+
+    {
+      id: 2,
+      type: 'images',
+      question: '¿Cuál crees que cumple con O?',
+      options: [
+        {
+          id: 1,
+          url: 'https://picsum.photos/200/300',
+        },
+        {
+          id: 2,
+          url: 'https://picsum.photos/200/300',
+        }
+      ]
+    }
+  ];
 
   constructor(
     private storageSvc: StorageService,
@@ -46,22 +76,12 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
   getInfo() {
     this.getSesion();
     this.getActiveUsers();
-    this.getResultsVisibility();
   }
 
   changeName() {
-    if (this.optionSelected) {
-      this.cantVote();
-      return;
-    }
     localStorage.removeItem('user-name');
 
     this.removeUser(this.getUser().id);
-  }
-
-  cantVote() {
-    this.messageService.clear();
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No puedes cambiar tu nombre si votaste' });
   }
 
   getUser() {
@@ -70,7 +90,6 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
 
   removeUser(id: string) {
     this.storageSvc.Delete('activeUsers', id).then(() => {
-      this.optionSelected = undefined;
       this.userName = undefined;
     });
     this.getUserActive();
@@ -100,14 +119,14 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
 
     this.storageSvc.GetByParameter('events', 'id', aux).subscribe((res: any) => {
       this.event = res[0];
+      this.eventData = this.testEvent; //res[0].data;
       this.loading = false;
-      this.validate();
-      this.getResults();
+      this.validateExistingEvent();
     });
     this.getUserActive();
   }
 
-  validate() {
+  validateExistingEvent() {
     if (!this.event) {
       this.router.navigateByUrl('');
     }
@@ -142,129 +161,5 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     let exist = this.activeUsers.findIndex((u) => u.name == this.userName && u.sesion == this.getId);
     if (!user.name) return;
     if (exist == -1) this.storageSvc.Update('activeUsers', this.activeUsers[exist].id, user);
-  }
-
-  selectOption(opt: string) {
-    if (this.showResults) {
-      this.cantVoteShowResults();
-      return;
-    }
-    if (this.optionSelected) {
-      this.areVotedMsg();
-      return;
-    }
-
-    this.optionSelected = opt;
-
-    let result = { user: this.userName, vote: this.optionSelected, sesion: this.getId };
-    let exist = this.results.findIndex((r) => r.user == result.user);
-    if (exist != -1) return;
-    this.storageSvc.Insert(this.getId, result);
-  }
-
-  cantVoteShowResults() {
-    this.messageService.clear();
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'No puedes votar mientras los resultados son visibles'
-    });
-    return;
-  }
-
-  areVotedMsg() {
-    this.messageService.clear();
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No puedes cambiar tu voto' });
-  }
-
-  getResults() {
-    this.storageSvc.GetAll(this.getId).subscribe((res: any) => {
-      this.results = res;
-      this.restartAnswered();
-      this.setAnswered();
-      this.calcularPromedio();
-    });
-  }
-
-  getResultsVisibility() {
-    this.storageSvc.GetByParameter('events', 'id', this.getId).subscribe((res: any) => {
-      this.event = res[0];
-      this.showResults = this.event.resultsVisibility;
-    });
-  }
-
-  presentResults() {
-    if (this.results.length == 0) {
-      this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Aún no hay resultados para mostrar' });
-      return;
-    }
-    this.event.resultsVisibility = true;
-    this.storageSvc.Update(this.getId, 'events', this.event);
-    this.showResults = true;
-  }
-
-  hideResults() {
-    this.event.resultsVisibility = false;
-    this.storageSvc.Update(this.getId, 'events', this.event);
-    this.showResults = false;
-    this.restartAnswered();
-  }
-
-  calcularPromedio() {
-    let total = 0;
-    let resultsAux = this.results.filter((r) => r.vote !== '?');
-    resultsAux = resultsAux.filter((r) => r.vote !== '☕');
-
-    resultsAux.forEach((v) => {
-      if (v.vote !== '?') {
-        total += parseInt(v.vote);
-      }
-    });
-
-    this.promedio = total / resultsAux.length;
-  }
-
-  
-  setAnswered() {
-    if (this.results.length == 0) this.restartAnswered();
-    this.results.forEach((r) => {
-      if (r.user == this.userName) {
-        this.optionSelected = r.vote;
-      }
-    });
-
-    this.activeUsers.forEach((user) => {
-      this.results.forEach((item) => {
-        if (user.name == item.user) {
-          user.answer = true;
-        }
-      });
-    });
-  }
-
-  restartAnswered() {
-    this.optionSelected = undefined;
-    this.activeUsers.forEach((user) => {
-      user.answer = false;
-    });
-  }
-
-  restart() {
-    if (this.results.length == 0) return;
-    this.alertService.confirmAlert('¿Desea reiniciar la votación?').then((confirm) => {
-      if (confirm) {
-        this.hideResults();
-        this.storageSvc.DeleteColecction(this.getId.trim()).then(() => {
-          this.restartAnswered();
-          this.getInfo();
-          this.optionSelected = undefined;
-        });
-      }
-    });
-  }
-
-  toggleShowActions(){
-    this.showActions = !this.showActions;
   }
 }

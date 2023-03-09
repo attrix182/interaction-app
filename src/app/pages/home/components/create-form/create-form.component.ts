@@ -15,6 +15,10 @@ export class CreateFormComponent extends FormValidator implements OnInit {
   isLoading: boolean = false;
   @Output('back') back: any = new EventEmitter<void>();
   @Output('nextStep') nextStepEvent: any = new EventEmitter<string>();
+
+  options: any[] = [{name:'Code snippet', code:'1'},{name:'Imagenes', code:'1'},{name:'Opciones', code:'1'},{name:'Booleano', code:'1'}];
+
+
   constructor(
     private fb: UntypedFormBuilder,
     private messageService: MessageService,
@@ -33,6 +37,7 @@ export class CreateFormComponent extends FormValidator implements OnInit {
   initForm() {
     this.formGroup = this.fb.group({
       team: ['', [Validators.required]],
+      selectedOption: ['', [Validators.required]],
     });
   }
 
