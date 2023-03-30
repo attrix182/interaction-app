@@ -21,9 +21,36 @@
         <app-question-images
           [question]="eventData[actualPage].question"
           [options]="eventData[actualPage].options"
+          [eventID]="event.id"
+          [page]="actualPage"
+          [user]="userName"
+          [votes]="votes"
         ></app-question-images>
       </div>
-    
+            
+
+
+      <section class="controls" *ngIf="userName === 'admin'">
+        <button
+          (click)="previousPage()"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-arrow-left"
+          class="p-button-rounded "
+          [disabled]="actualPage == 0"
+        ></button>
+        <button
+          (click)="nextPage()"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-arrow-right"
+          class="p-button-rounded"
+          [disabled]="actualPage === eventData.length - 1"
+        ></button>
+      </section>
+
     </div>
   </section>
 

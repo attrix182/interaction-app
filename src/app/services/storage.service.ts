@@ -50,7 +50,7 @@ export class StorageService {
       );
   }
 
-  Update(id: string, collectionName: string, data: any) {
+  Update( collectionName: string,id: string, data: any) {
     return this.cloudFireStore
       .collection(collectionName)
       .doc(id)

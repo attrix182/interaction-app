@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AvatarModule } from 'primeng/avatar';
 import {MenuItem, MessageService} from 'primeng/api';
 import {InputTextModule} from 'primeng/inputtext';
 import {StepsModule} from 'primeng/steps';
@@ -25,7 +25,8 @@ const PrimeNGModules = [
   MessagesModule,
   MessageModule,
   ProgressSpinnerModule,
-  DropdownModule
+  DropdownModule,
+  AvatarModule
 ];
 
 @NgModule({

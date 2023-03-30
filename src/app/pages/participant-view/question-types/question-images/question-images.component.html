@@ -3,10 +3,26 @@
     <h1 class="title text-center">{{ question }}</h1>
     <div class="question-container">
       <div *ngFor="let option of options">
-        <article (click)="selectOption(option)"  >
-            <p-skeleton  *ngIf="loading" width="45vw" height="55vh"></p-skeleton>
-            <div [class.selected]="option.id == selected?.id" class="question-option" [style]="'background-image: url(' + option.url + ')'"></div>
+        <article (click)="selectOption(option)">
+          <p-skeleton *ngIf="loading" width="45vw" height="55vh"></p-skeleton>
+          <div
+            [class.selected]="option.id == selected?.id"
+            class="question-option"
+            [style]="'background-image: url(' + option.url + ')'"
+          ></div>
         </article>
+        <section class="voters">
+          <div *ngFor="let vote of votes">
+            <p-avatar
+              *ngIf="vote.option === option.id"
+              [label]="vote.user[0]"
+              [style]="{ 'background-color': vote.color }"
+              [size]="'small'"
+              [shape]="'circle'"
+              [styleClass]="'mt-2'"
+            ></p-avatar>
+          </div>
+        </section>
       </div>
     </div>
   </div>
