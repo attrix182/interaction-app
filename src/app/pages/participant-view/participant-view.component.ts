@@ -137,11 +137,13 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     this.actualPage++;
     console.log(this.getId);
     this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage});
+    this.storageSvc.DeleteColecction('votes')
   }
 
   previousPage(){
     this.actualPage--;
     this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage});
+    this.storageSvc.DeleteColecction('votes')
   }
 
 }
