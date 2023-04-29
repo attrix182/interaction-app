@@ -53,7 +53,6 @@ export class QuestionImagesComponent implements OnInit {
     this.storageSvc.Insert('votes', vote);
   }
 
-
   getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';

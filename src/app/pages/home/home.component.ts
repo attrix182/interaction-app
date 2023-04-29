@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventSesion } from 'src/app/models/event.model';
 import { StorageService } from 'src/app/services/storage.service';
@@ -40,14 +40,17 @@ export class HomeComponent implements OnInit {
   fullUrl: string = this.router.url;
   event: EventSesion;
   eventID: string = this.fullUrl.split('/')[2];
+  @ViewChild('landingImg') landingImg: ElementRef;
+  @ViewChild('homeDiv') homeDiv: ElementRef;
   constructor(private storageSvc: StorageService, private router: Router) {}
 
   ngOnInit(): void {
     this.checkUrl();
   }
 
-  toggleShowCreate() {
-    this.showCreate = !this.showCreate;
+  goToCreate() {
+ this.router.navigateByUrl('event/create')
+    
   }
 
   toggleShowParticipate() {
@@ -72,10 +75,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  handleID($event?:Event) {
+  handleID($event?: Event) {
     this.isLoading = true;
     this.showCreate = false;
-    $event ? this.eventID = $event.toString() : this.eventID;
+    $event ? (this.eventID = $event.toString()) : this.eventID;
     this.storageSvc.GetByParameter('events', 'id', this.eventID).subscribe((res: any) => {
       this.isLoading = false;
       this.event = res[0];

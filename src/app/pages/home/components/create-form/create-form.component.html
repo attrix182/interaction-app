@@ -5,18 +5,51 @@
     <div class="title">Crear una sesión</div>
     <div class="subtitle">¿Como se llama tu equipo?</div>
 
-    <form [formGroup]="formGroup" class="p-fluid p-grid">
+    <form class="p-fluid p-grid">
       <!-- Equipo -->
       <h3 for="">Nombre del equipo</h3>
-      <input type="text" placeholder="Nombre del equipo" pInputText type="text" formControlName="team" />
+      <input type="text" placeholder="Nombre del equipo" pInputText type="text" [(ngModel)]="teamName" [ngModelOptions]="{standalone: true}">
+      
     </form>
+
+    <div class="bottom-button">
+      <button pButton class="p-button-raised p-button-primary" (click)="showDialog()">Agregar pregunta</button>
+    </div>
+
+    <p-dialog header="Escribe tu desafio" [(visible)]="visible" [style]="{ width: '50vw' }">
+      <section class="center">
+        <form [formGroup]="formGroup">
+          <h3 for="">Pregunta</h3>
+          <input type="text" placeholder="Pregunta" pInputText type="text" formControlName="question" />
+          <h3 for="">Primer Opcion</h3>
+          <input type="text" placeholder="Opcion A" pInputText type="text" formControlName="optionA" />
+          <h3 for="">Segunda Opcion</h3>
+          <input type="text" placeholder="Opcion B" pInputText type="text" formControlName="optionB" />
+          <div class="bottom-button">
+            <button pButton class="p-button-raised p-button-primary" (click)="addQuestion()">Agregar</button>
+          </div>
+        </form>
+      </section>
+    </p-dialog>
+
+    <div *ngIf="questions.length > 0" class="accordion-container">
+      <ng-container *ngFor="let question of questions">
+        <p-accordion class="accordion-item">
+          <p-accordionTab [header]="question.question">
+            <div>
+              <img [src]="question.options[0]" width="120" alt="" />
+              <img [src]="question.options[1]" width="120" alt="" />
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </ng-container>
+    </div>
 
     <div class="buttons mt-4">
       <button pButton class="p-button-raised p-button-primary" (click)="back.emit()">Volver</button>
       <button
         pButton
         class="p-button-raised p-button-primary"
-        [disabled]="!formGroup.valid && !isLoading"
         (click)="createSesion()"
       >
         <p-progressSpinner

@@ -19,6 +19,7 @@
 
       <div *ngIf="eventData[actualPage].type === 'images' ">
         <app-question-images
+          #question
           [question]="eventData[actualPage].question"
           [options]="eventData[actualPage].options"
           [eventID]="event.id"
@@ -53,7 +54,6 @@
 
     </div>
   </section>
-
 
 
 <p-toast position="top-center" class="p-toast"></p-toast>

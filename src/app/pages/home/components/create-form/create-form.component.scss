@@ -5,49 +5,68 @@
   justify-content: center;
 }
 
-.card{
+.card {
   min-width: 40vw;
   min-height: 35vh;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .title{
+  .title {
     font-size: 2.5em;
     text-align: start !important;
   }
-  .subtitle{
+  .subtitle {
     font-size: 1.3em;
     margin-top: 20px;
     margin-bottom: 20px;
   }
+}
+.buttons {
+  margin-top: 4em;
+  display: flex;
+  gap: 1.5em;
+  justify-content: center;
+}
+.p-button {
+  height: 4rem;
+  width: 9rem;
+  font-size: 1em;
+  display: table-cell;
+  vertical-align: middle;
+  background-color: #8f21ef;
+}
 
-  .buttons {
-    margin-top: 4em;
-    display: flex;
-    gap: 1.5em;
-    justify-content: center;
-    .p-button {
-      height: 4rem;
-      width: 9rem;
-      font-size: 1em;
-      display: table-cell;
-      vertical-align: middle;
-      background-color: #8F21EF;
-    }
-  }
+.bottom-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.accordion-container{
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item{
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 @media screen and (max-width: 940px) {
-  .card{
+  .card {
     min-width: 70vw;
     min-height: 36vh;
     background-color: rgb(255, 255, 255);
   }
 }
-
-

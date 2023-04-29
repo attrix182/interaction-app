@@ -13,6 +13,9 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {DropdownModule} from 'primeng/dropdown';
+import { AccordionModule } from 'primeng/accordion';
+import { DialogModule } from 'primeng/dialog';
+
 const PrimeNGModules = [
   InputTextModule,
   StepsModule,
@@ -26,7 +29,9 @@ const PrimeNGModules = [
   MessageModule,
   ProgressSpinnerModule,
   DropdownModule,
-  AvatarModule
+  AvatarModule,
+  AccordionModule,
+  DialogModule
 ];
 
 @NgModule({

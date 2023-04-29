@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -7,6 +7,7 @@ import { VoteModel } from 'src/app/models/vote.model';
 import { AlertService } from 'src/app/services/alerts.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { FormValidator } from 'src/app/shared/primeng/form.validator';
+import { QuestionImagesComponent } from './question-types/question-images/question-images.component';
 
 @Component({
   selector: 'fc-participant-view',
@@ -14,50 +15,17 @@ import { FormValidator } from 'src/app/shared/primeng/form.validator';
   styleUrls: ['./participant-view.component.scss']
 })
 export class ParticipantViewComponent extends FormValidator implements OnInit {
+  @ViewChild ('question') question: QuestionImagesComponent;
   loading: boolean = false;
   getId = this.router.url.split('/')[2].trim();
   event: EventSesion;
   override formGroup: any;
   userName: any = undefined;
   activeUsers: any[] = undefined;
-
   eventData: any;
   actualPage = 0;
   votes: VoteModel[];
 
-  testEvent = [
-    {
-      id: 1,
-      type: 'images',
-      question: '¿Cuál crees que cumple con Single Responsability?',
-      options: [
-        {
-          id: 1,
-          url: 'https://www.researchgate.net/publication/335351970/figure/fig5/AS:795048484536323@1566565738552/Code-snippet-implementing-the-check-ifA-B0.jpg'
-        },
-        {
-          id: 2,
-          url: 'https://intelliabbdotcom.files.wordpress.com/2018/03/snippet_def.jpg'
-        }
-      ]
-    },
-
-    {
-      id: 2,
-      type: 'images',
-      question: '¿Cuál crees que cumple con O?',
-      options: [
-        {
-          id: 1,
-          url: 'https://picsum.photos/200/300'
-        },
-        {
-          id: 2,
-          url: 'https://picsum.photos/200/300'
-        }
-      ]
-    }
-  ];
 
   constructor(
     private storageSvc: StorageService,
@@ -84,13 +52,15 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     this.storageSvc.GetByParameter('votes', 'event', this.getId).subscribe((res: any) => {
       this.votes = res;
       console.log(this.votes);
+      if(this.votes.length == 0){
+        this.question.selected = undefined;
+      }
     });
   }
 
   changeName() {
     localStorage.removeItem('user-name');
-
-    this.removeUser(this.getUser().id);
+    this.getUserName();
   }
 
   getUser() {
@@ -98,11 +68,7 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     return this.activeUsers.find((u) => u.name == this.userName);
   }
 
-  removeUser(id: string) {
-    this.storageSvc.Delete('activeUsers', id).then(() => {
-      this.userName = undefined;
-    });
-  }
+
 
   definirMensajesError(): void {}
 
@@ -112,7 +78,7 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     this.storageSvc.GetByParameter('events', 'id', aux).subscribe((res: any) => {
       this.event = res[0];
       this.actualPage = res[0].actualPage;
-      this.eventData = this.testEvent; //res[0].data;
+      this.eventData = res[0].questions; //res[0].data;
       this.loading = false;
       this.validateExistingEvent();
     });

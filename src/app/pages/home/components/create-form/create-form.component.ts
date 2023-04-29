@@ -13,9 +13,11 @@ import { FormValidator } from 'src/app/shared/primeng/form.validator';
 export class CreateFormComponent extends FormValidator implements OnInit {
   override formGroup: UntypedFormGroup;
   isLoading: boolean = false;
+  questions: any[] = [];
+  teamName:string;
   @Output('back') back: any = new EventEmitter<void>();
   @Output('nextStep') nextStepEvent: any = new EventEmitter<string>();
-
+  visible: boolean;
   options: any[] = [{name:'Code snippet', code:'1'},{name:'Imagenes', code:'1'},{name:'Opciones', code:'1'},{name:'Booleano', code:'1'}];
 
 
@@ -30,20 +32,43 @@ export class CreateFormComponent extends FormValidator implements OnInit {
 
   definirMensajesError(): void {}
 
+  showDialog() {
+      this.visible = true;
+  }
+
   ngOnInit() {
     this.initForm();
   }
 
   initForm() {
     this.formGroup = this.fb.group({
-      team: ['', [Validators.required]],
-      selectedOption: ['', [Validators.required]],
+      question: ['', [Validators.required]],
+      optionA: [ '', [Validators.required]],
+      optionB: [ '', [Validators.required]],
     });
+  }
+
+  addQuestion(): void {
+    let question = {
+      id: this.questions.length + 1,
+      question: this.formGroup.value.question,
+      type: 'images',
+      options: [{id: 1, url: this.formGroup.value.optionA}, {id:2, url:this.formGroup.value.optionB}]
+    }
+
+
+
+    this.questions.push(question);
+    this.formGroup.reset();
+    this.visible = false;
   }
 
   createSesion() {
     this.isLoading = true;
-    let form = this.formGroup.value;
+    let form = {} as any;
+    form.team = this.teamName;
+    form.questions = this.questions;
+    form.actualPage = 0;
     form.id = this.cloudFireStore.createId();
     form.active = true;
     this.storageSvc

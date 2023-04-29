@@ -4,14 +4,15 @@ import { DesignSesionComponent } from './desing-sesion/design-sesion/design-sesi
 import { HomeComponent } from './pages/home/home.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ParticipantViewComponent } from './pages/participant-view/participant-view.component';
+import { CreateFormComponent } from './pages/home/components/create-form/create-form.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: ':id',  component: HomeComponent},
+  {path:'event/create', component: CreateFormComponent},
   {path: 'about/landing',  component: LandingComponent},
   {path:'info/:id', component: HomeComponent},
   {path:'sesion/:id', component: ParticipantViewComponent},
-  {path:'design/:teamName', component: DesignSesionComponent},
 ];
 
 @NgModule({
