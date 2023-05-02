@@ -67,7 +67,7 @@ export class AlertService {
     });
   }
 
-  confirmAlert(messagge:string) {
+  confirmAlert(messagge: string) {
     return new Promise((resolve) => {
       Swal.fire({
         title: messagge,
@@ -101,4 +101,9 @@ export class AlertService {
       });
     });
   }
+
 }
+
+
+
+

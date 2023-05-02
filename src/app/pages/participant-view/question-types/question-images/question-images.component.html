@@ -1,6 +1,9 @@
 <section>
   <div>
     <h1 class="title text-center">{{ question }}</h1>
+    <h5 class="subtitle text-center">
+      ¿Cual caso crees que aplica este principio?
+    </h5>
     <div class="question-container">
       <div *ngFor="let option of options">
         <article (click)="selectOption(option)">

@@ -1,0 +1,123 @@
+.title {
+  margin-top: 10vh;
+  font-size: 2em;
+}
+
+.question-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 35px;
+  margin-top: 8vh;
+}
+
+.question-option {
+  width: 630px;
+  height: 450px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px 5px 0 0;
+}
+
+form {
+  display: flex;
+}
+.input-box {
+  display: flex;
+  justify-content: start;
+  position: relative;
+}
+
+.number-line {
+  color: white;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  position: absolute;
+  p{
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 500;
+  }
+}
+
+.form-vscode {
+  background-color: rgb(42, 45, 50);
+  width: 100%;
+  height: 100px;
+  padding-left: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+.votes{
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 5px;
+
+}
+
+.item-vote{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(42, 45, 50);
+  margin: 5px;
+  div{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    padding-left: 10px;
+    color: rgb(108, 136, 252);
+  }
+}
+
+input {
+  margin-top: 10px;
+  margin-left: 20px;
+  background-color: rgb(48, 52, 56) !important;
+  height: 20px;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: rgb(108, 136, 252);
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+input:focus {
+  border: none;
+  outline: 0 none;
+  outline-offset: 0px;
+  box-shadow: none !important;
+  caret-color: rgb(206, 224, 254);
+}
+
+.p-disabled, .p-component:disabled {
+  opacity: 1 !important;
+}
+
+@media screen and (max-width: 1368px) {
+  .question-option {
+    width: 530px;
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .question-option {
+    width: 430px;
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .question-container {
+    flex-direction: column;
+  }
+  .question-option {
+    width: 430px;
+    height: 250px;
+  }
+}

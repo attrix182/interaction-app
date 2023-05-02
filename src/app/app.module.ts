@@ -17,6 +17,7 @@ import { QrCodeModule } from 'ng-qrcode';
 import { LandingComponent } from './pages/landing/landing.component';
 import { DesignSesionComponent } from './desing-sesion/design-sesion/design-sesion.component';
 import { QuestionImagesComponent } from './pages/participant-view/question-types/question-images/question-images.component';
+import { QuestionInputComponent } from './pages/participant-view/question-types/question-input/question-input.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { QuestionImagesComponent } from './pages/participant-view/question-types
     LandingComponent,
     DesignSesionComponent,
     QuestionImagesComponent,
+    QuestionInputComponent,
   ],
   imports: [
     BrowserModule,

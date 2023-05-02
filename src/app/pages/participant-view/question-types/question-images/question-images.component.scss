@@ -10,7 +10,7 @@
   width: 100%;
   height: 100%;
   gap: 35px;
-  margin-top: 15vh;
+  margin-top: 8vh;
 }
 
 .question-option {
@@ -24,8 +24,8 @@
 }
 
 .question-option:hover {
-  cursor: pointer;
-  scale: 1.2;
+  cursor: help;
+  scale: 1.15;
   z-index: 1;
 }
 

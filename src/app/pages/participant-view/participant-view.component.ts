@@ -15,7 +15,7 @@ import { QuestionImagesComponent } from './question-types/question-images/questi
   styleUrls: ['./participant-view.component.scss']
 })
 export class ParticipantViewComponent extends FormValidator implements OnInit {
-  @ViewChild ('question') question: QuestionImagesComponent;
+  @ViewChild ('questionImages') questionImages: QuestionImagesComponent;
   loading: boolean = false;
   getId = this.router.url.split('/')[2].trim();
   event: EventSesion;
@@ -51,12 +51,13 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
   getVotes() {
     this.storageSvc.GetByParameter('votes', 'event', this.getId).subscribe((res: any) => {
       this.votes = res;
-      console.log(this.votes);
-      if(this.votes.length == 0){
-        this.question.selected = undefined;
+      if(this.votes.length == 0 && this.eventData[this.actualPage].type == 'images'){
+        this.questionImages.selected = undefined;
       }
     });
   }
+
+
 
   changeName() {
     localStorage.removeItem('user-name');
@@ -68,8 +69,6 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
     return this.activeUsers.find((u) => u.name == this.userName);
   }
 
-
-
   definirMensajesError(): void {}
 
   getSesion() {
@@ -79,6 +78,7 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
       this.event = res[0];
       this.actualPage = res[0].actualPage;
       this.eventData = res[0].questions; //res[0].data;
+      console.log(this.eventData);
       this.loading = false;
       this.validateExistingEvent();
     });

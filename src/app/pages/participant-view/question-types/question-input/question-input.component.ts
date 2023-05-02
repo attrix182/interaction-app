@@ -1,50 +1,54 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { VoteModel } from 'src/app/models/vote.model';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
-  selector: 'app-question-images',
-  templateUrl: './question-images.component.html',
-  styleUrls: ['./question-images.component.scss']
+  selector: 'app-question-input',
+  templateUrl: './question-input.component.html',
+  styleUrls: ['./question-input.component.scss']
 })
-export class QuestionImagesComponent implements OnInit {
+export class QuestionInputComponent implements OnInit {
+  @ViewChild('answerInput') answerInput: any;
   @Input() question: string;
   @Input() options: any[];
   @Input() eventID: string;
   @Input() page: number;
   @Input() user: string;
   @Input() votes: VoteModel[];
-  selected: any;
+  answer:string;
   loading = false;
 
   constructor(private storageSvc: StorageService) {}
 
   ngOnInit(): void {
+
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      this.filterVotesByPage();
+      console.log(this.votes);
+      this.setVote();
     }, 100);
   }
 
-  filterVotesByPage() {
-    this.votes = this.votes.filter((vote) => vote.page == this.page);
+  setVote(){
     this.votes.forEach((vote) => {
-      if (vote.user == this.user) {
-        this.selected = this.options.find((option) => option.id == vote.option);
+      if(vote.user == this.user){
+        this.answer = vote.answer;
+        this.answerInput.nativeElement.disabled = true;
       }
-    });
+    })
+    if(this.votes.length === 0){
+      this.answerInput.nativeElement.disabled = false;
+    }
   }
 
-  selectOption(option: any) {
-    if (this.selected) {
-      return;
-    }
-    this.selected = option;
-
+  publishAnswer(){
+    if(this.answer.toString().length == 0) return;
+    this.answerInput.nativeElement.disabled = true;
+    this.answer = this.answer.trim();
     let vote: VoteModel = {
       page: this.page,
-      option: option.id,
+      answer: this.answer,
       event: this.eventID,
       user: this.user,
       color: this.getRandomColor()
@@ -61,4 +65,7 @@ export class QuestionImagesComponent implements OnInit {
     }
     return color;
   }
+
+
+
 }

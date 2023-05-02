@@ -13,13 +13,11 @@
     ></button>
   </aside>
 
-
   <section>
     <div *ngIf="!loading">
-
-      <div *ngIf="eventData[actualPage].type === 'images' ">
+      <div *ngIf="eventData[actualPage].type === 'images'">
         <app-question-images
-          #question
+          #questionImages
           [question]="eventData[actualPage].question"
           [options]="eventData[actualPage].options"
           [eventID]="event.id"
@@ -28,9 +26,19 @@
           [votes]="votes"
         ></app-question-images>
       </div>
-            
 
-
+        <div *ngIf="eventData[actualPage].type === 'input'">
+          <app-question-input
+            #questionInput
+            [question]="eventData[actualPage].question"
+            [options]="eventData[actualPage].options"
+            [eventID]="event.id"
+            [page]="actualPage"
+            [user]="userName"
+            [votes]="votes"
+          ></app-question-input>
+        </div>
+     
       <section class="controls" *ngIf="userName === 'admin'">
         <button
           (click)="previousPage()"
@@ -38,7 +46,7 @@
           pRipple
           type="button"
           icon="pi pi-arrow-left"
-          class="p-button-rounded "
+          class="p-button-rounded"
           [disabled]="actualPage == 0"
         ></button>
         <button
@@ -51,9 +59,8 @@
           [disabled]="actualPage === eventData.length - 1"
         ></button>
       </section>
-
     </div>
   </section>
 
-
-<p-toast position="top-center" class="p-toast"></p-toast>
+  <p-toast position="top-center" class="p-toast"></p-toast>
+</div>

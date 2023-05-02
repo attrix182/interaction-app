@@ -14,12 +14,16 @@ export class CreateFormComponent extends FormValidator implements OnInit {
   override formGroup: UntypedFormGroup;
   isLoading: boolean = false;
   questions: any[] = [];
-  teamName:string;
+  teamName: string;
   @Output('back') back: any = new EventEmitter<void>();
   @Output('nextStep') nextStepEvent: any = new EventEmitter<string>();
   visible: boolean;
-  options: any[] = [{name:'Code snippet', code:'1'},{name:'Imagenes', code:'1'},{name:'Opciones', code:'1'},{name:'Booleano', code:'1'}];
-
+  options: any[] = [
+    { name: 'Code snippet', code: '1' },
+    { name: 'Imagenes', code: '1' },
+    { name: 'Opciones', code: '1' },
+    { name: 'Booleano', code: '1' }
+  ];
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -33,7 +37,7 @@ export class CreateFormComponent extends FormValidator implements OnInit {
   definirMensajesError(): void {}
 
   showDialog() {
-      this.visible = true;
+    this.visible = true;
   }
 
   ngOnInit() {
@@ -43,8 +47,8 @@ export class CreateFormComponent extends FormValidator implements OnInit {
   initForm() {
     this.formGroup = this.fb.group({
       question: ['', [Validators.required]],
-      optionA: [ '', [Validators.required]],
-      optionB: [ '', [Validators.required]],
+      optionA: ['', [Validators.required]],
+      optionB: ['', [Validators.required]]
     });
   }
 
@@ -53,10 +57,11 @@ export class CreateFormComponent extends FormValidator implements OnInit {
       id: this.questions.length + 1,
       question: this.formGroup.value.question,
       type: 'images',
-      options: [{id: 1, url: this.formGroup.value.optionA}, {id:2, url:this.formGroup.value.optionB}]
-    }
-
-
+      options: [
+        { id: 1, url: this.formGroup.value.optionA },
+        { id: 2, url: this.formGroup.value.optionB }
+      ]
+    };
 
     this.questions.push(question);
     this.formGroup.reset();
@@ -84,5 +89,4 @@ export class CreateFormComponent extends FormValidator implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la sesión' });
       });
   }
-
 }
