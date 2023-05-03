@@ -15,35 +15,34 @@ export class QuestionInputComponent implements OnInit {
   @Input() page: number;
   @Input() user: string;
   @Input() votes: VoteModel[];
-  answer:string;
+  answer: string;
   loading = false;
 
   constructor(private storageSvc: StorageService) {}
 
   ngOnInit(): void {
-
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
       console.log(this.votes);
       this.setVote();
-    }, 100);
+    }, 300);
   }
 
-  setVote(){
+  setVote() {
+    if (this.votes.length === 0) {
+      this.answerInput.nativeElement.disabled = false;
+    }
     this.votes.forEach((vote) => {
-      if(vote.user == this.user){
+      if (vote.user == this.user) {
         this.answer = vote.answer;
         this.answerInput.nativeElement.disabled = true;
       }
-    })
-    if(this.votes.length === 0){
-      this.answerInput.nativeElement.disabled = false;
-    }
+    });
   }
 
-  publishAnswer(){
-    if(this.answer.toString().length == 0) return;
+  publishAnswer() {
+    if (this.answer.toString().length == 0) return;
     this.answerInput.nativeElement.disabled = true;
     this.answer = this.answer.trim();
     let vote: VoteModel = {
@@ -66,6 +65,9 @@ export class QuestionInputComponent implements OnInit {
     return color;
   }
 
-
-
 }
+
+
+
+
+
