@@ -24,21 +24,23 @@
           [page]="actualPage"
           [user]="userName"
           [votes]="votes"
+          [resultsVisibility]="resultsVisibility"
         ></app-question-images>
       </div>
 
-        <div *ngIf="eventData[actualPage].type === 'input'">
-          <app-question-input
-            #questionInput
-            [question]="eventData[actualPage].question"
-            [options]="eventData[actualPage].options"
-            [eventID]="event.id"
-            [page]="actualPage"
-            [user]="userName"
-            [votes]="votes"
-          ></app-question-input>
-        </div>
-     
+      <div *ngIf="eventData[actualPage].type === 'input'">
+        <app-question-input
+          #questionInput
+          [question]="eventData[actualPage].question"
+          [options]="eventData[actualPage].options"
+          [eventID]="event.id"
+          [page]="actualPage"
+          [user]="userName"
+          [votes]="votes"
+          [resultsVisibility]="resultsVisibility"
+        ></app-question-input>
+      </div>
+
       <section class="controls" *ngIf="userName === 'admin'">
         <button
           (click)="previousPage()"
@@ -49,6 +51,18 @@
           class="p-button-rounded"
           [disabled]="actualPage == 0"
         ></button>
+
+        <button
+          (click)="toggleShowResults()"
+          pButton
+          pRipple
+          type="button"
+          [icon]="resultsVisibility ? 'pi pi-eye-slash' : 'pi pi-eye'"
+          class="p-button-rounded"
+        >
+          &nbsp; {{ resultsVisibility ? 'Ocultar resultados' : 'Mostrar resultados' }}
+        </button>
+
         <button
           (click)="nextPage()"
           pButton

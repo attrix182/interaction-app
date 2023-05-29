@@ -14,6 +14,7 @@ export class QuestionInputComponent implements OnInit {
   @Input() eventID: string;
   @Input() page: number;
   @Input() user: string;
+  @Input() resultsVisibility: boolean;
   @Input() votes: VoteModel[];
   answer: string;
   loading = false;
@@ -30,9 +31,6 @@ export class QuestionInputComponent implements OnInit {
   }
 
   setVote() {
-    if (this.votes.length === 0) {
-      this.answerInput.nativeElement.disabled = false;
-    }
     this.votes.forEach((vote) => {
       if (vote.user == this.user) {
         this.answer = vote.answer;

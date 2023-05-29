@@ -14,7 +14,7 @@
             [style]="'background-image: url(' + option.url + ')'"
           ></div>
         </article>
-        <section class="voters">
+        <section class="voters" *ngIf="resultsVisibility">
           <div *ngFor="let vote of votes">
             <p-avatar
               *ngIf="vote.option === option.id"
@@ -23,6 +23,7 @@
               [size]="'small'"
               [shape]="'circle'"
               [styleClass]="'mt-2'"
+              [pTooltip]="vote.user"
             ></p-avatar>
           </div>
         </section>

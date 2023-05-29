@@ -39,6 +39,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  p-avatar{
+    cursor: pointer;
+  }
 }
 
 @media screen and (max-width: 1368px) {

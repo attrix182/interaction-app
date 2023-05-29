@@ -26,14 +26,14 @@ form {
 }
 .input-box {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   position: relative;
 }
 
 .number-line {
   color: white;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
   position: absolute;
   p{
@@ -66,6 +66,8 @@ form {
   padding: 10px;
   background-color: rgb(42, 45, 50);
   margin: 5px;
+  cursor: pointer;
+
   div{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;

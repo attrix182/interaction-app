@@ -14,6 +14,7 @@ export class QuestionImagesComponent implements OnInit {
   @Input() page: number;
   @Input() user: string;
   @Input() votes: VoteModel[];
+  @Input() resultsVisibility: boolean;
   selected: any;
   loading = false;
 

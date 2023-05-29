@@ -4,13 +4,12 @@
     <h5 class="subtitle text-center">Escribe un nombre mejor!</h5>
     <div class="question-container">
       <article>
-
         <div class="question-option" [style]="'background-image: url(' + options[0].url + ')'"></div>
       </article>
 
       <article>
-        <div class="form-vscode" >
-          <form >
+        <div class="form-vscode">
+          <form>
             <div>
               <div class="number-line">
                 <p>1</p>
@@ -18,7 +17,7 @@
               </div>
               <div class="input-box">
                 <input
-                pTooltip="Escribe tu respuesta y pulsa Enter"
+                  pTooltip="Escribe tu respuesta y pulsa Enter"
                   #answerInput
                   (keydown.enter)="publishAnswer()"
                   pInputText
@@ -31,7 +30,7 @@
           </form>
         </div>
 
-        <section class="votes" *ngIf="votes.length != 0">
+        <section class="votes" *ngIf="votes.length != 0 && resultsVisibility">
           <div *ngFor="let answer of votes">
             <article class="item-vote">
               <p-avatar
@@ -39,7 +38,7 @@
                 [style]="{ 'background-color': answer.color, color: 'white' }"
                 [size]="'small'"
                 [shape]="'circle'"
-              
+                [pTooltip]="answer.user"
               ></p-avatar>
               <div>{{ answer.answer }}</div>
             </article>

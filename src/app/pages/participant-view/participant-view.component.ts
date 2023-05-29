@@ -24,6 +24,7 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
   activeUsers: any[] = undefined;
   eventData: any;
   actualPage = 0;
+  resultsVisibility = false;
   votes: VoteModel[];
 
 
@@ -71,6 +72,12 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
 
   definirMensajesError(): void {}
 
+  toggleShowResults(){
+    this.resultsVisibility = !this.resultsVisibility;
+    this.event.resultsVisibility = this.resultsVisibility;
+    this.storageSvc.Update('events',this.getId,  {resultsVisibility: this.resultsVisibility});
+  }
+
   getSesion() {
     this.loading = true;
     let aux = this.getId;
@@ -78,6 +85,7 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
       this.event = res[0];
       this.actualPage = res[0].actualPage;
       this.eventData = res[0].questions; //res[0].data;
+      this.resultsVisibility = res[0].resultsVisibility;
       console.log(this.eventData);
       this.loading = false;
       this.validateExistingEvent();
@@ -101,14 +109,15 @@ export class ParticipantViewComponent extends FormValidator implements OnInit {
 
   nextPage(){
     this.actualPage++;
-    console.log(this.getId);
-    this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage});
+   this.resultsVisibility = false;
+    this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage, resultsVisibility: this.resultsVisibility});
     this.storageSvc.DeleteColecction('votes')
   }
 
   previousPage(){
     this.actualPage--;
-    this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage});
+    this.resultsVisibility = false;
+    this.storageSvc.Update('events', this.getId, {actualPage: this.actualPage, resultsVisibility: this.resultsVisibility});
     this.storageSvc.DeleteColecction('votes')
   }
 
